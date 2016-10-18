@@ -1,0 +1,18 @@
+{
+  "store": {
+    "simpledb": {
+      "domain": "aws-maintenance-notifications"
+    }
+  },
+  "notifications": {
+    "slack": {
+      "hook": "https://hooks.slack.com",
+      "channel": "#general",
+      "icon": ":yoda:",
+      "username": "Yoda",
+      "owners": {
+        "all": { "owner": "@manojlds"}
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "aws_maintenance_lambda",
+  "version": "0.1.0",
+  "description": "AWS Lambda function to send alerts to Slack on AWS maintenance events",
+  "main": "aws_maintenance_lambda.js",
+  "scripts": {},
+  "author": "manojlds <manojlds@gmail.com> (https://stacktoheap.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "3.4.1",
+    "config": "1.21.0"
+  }
+}
