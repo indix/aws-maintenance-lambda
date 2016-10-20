@@ -4,7 +4,7 @@ resource "null_resource" "aws_maintenance_lambda" {
   }
 
   provisioner "local-exec" {
-    command = "cd ${path.root}/../lambda && npm install"
+    command = "cd ${path.root}/../lambda && npm install --production"
   }
 }
 
