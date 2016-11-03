@@ -4,14 +4,14 @@ resource "null_resource" "aws_maintenance_lambda" {
   }
 
   provisioner "local-exec" {
-    command = "cd ${path.root}/../lambda && npm install --production"
+    command = "bash ${path.root}/scripts/setup.sh"
   }
 }
 
 resource "archive_file" "aws_maintenance_lambda" {
   type = "zip"
-  source_dir = "../lambda"
-  output_path = "../dist/lambda/aws_maintenance_lambda.zip"
+  source_dir = "../lambda/package"
+  output_path = "../dist/aws_maintenance_lambda.zip"
 
   depends_on = ["null_resource.aws_maintenance_lambda"]
 }
