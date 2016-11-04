@@ -3,7 +3,7 @@ var querystring = require('querystring');
 
 var Promise = require('bluebird');
 
-var config = require('config').notifications.slack;
+var config = require('./config.json').notifications.slack;
 
 var getMessageColor = function(instanceDetails) {
   var color = 'danger';

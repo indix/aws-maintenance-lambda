@@ -7,7 +7,6 @@
   "author": "manojlds <manojlds@gmail.com> (https://stacktoheap.com/)",
   "license": "MIT",
   "dependencies": {
-    "bluebird": "3.4.1",
-    "config": "1.21.0"
+    "bluebird": "3.4.1"
   }
 }
