@@ -2,7 +2,7 @@ var Promise = require('bluebird');
 var AWS = require('aws-sdk');
 var simpledb = new AWS.SimpleDB(utils.getRegionObject());
 
-var config = require('config').store.simpledb;
+var config = require('./config.json').store.simpledb;
 
 var createDomain = function() {
   return simpledb.createDomain({ DomainName: config.domain }).promise();
