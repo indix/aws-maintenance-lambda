@@ -27,3 +27,7 @@ Once the `config.json` has been updated, the lambda function can be manually ins
 ### Terraform
 
 The repo also has terraform plans to setup the lambda function - including the necessary IAM roles and lambda schedule (once an hour by default). A normal `terraform plan` and `terraform apply` should fully setup the lambda function. Requires  terraform 0.7.8+.
+
+## License
+
+This is an open source project licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
