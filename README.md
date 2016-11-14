@@ -2,6 +2,8 @@
 
 A lambda function to send alerts (to Slack) on AWS maintenance events. While the email from AWS includes only the instance id, the alert will include the Name of the instance and owner (team or individual on Slack) from the appropriate tags.
 
+![](/docs/slack-notification.png)
+
 ## Prerequisite
 
 The lambda function assumes that all resources (EC2 instances) are tagged with a key `Owner` specifying the owner of the resource.
