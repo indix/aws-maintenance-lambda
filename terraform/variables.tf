@@ -9,6 +9,7 @@ variable "aws_region" {
 variable "lamba_schedue" {
   default = "60 minutes"
 }
+
 variable "lambda_source_dir" {
   default = "../lambda"
 }
