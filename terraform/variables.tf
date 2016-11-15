@@ -21,3 +21,7 @@ variable "lambda_prepared_source_dir" {
 variable "lambda_archive_path" {
   default = "../dist/aws_maintenance_lambda.zip"
 }
+
+variable "config_json" {
+  default = "../lambda/config.json"
+}
