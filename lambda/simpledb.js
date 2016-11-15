@@ -1,3 +1,5 @@
+var utils = require('./utils');
+
 var Promise = require('bluebird');
 var AWS = require('aws-sdk');
 var simpledb = new AWS.SimpleDB(utils.getRegionObject());
