@@ -30,6 +30,20 @@ Once the `config.json` has been updated, the lambda function can be manually ins
 
 The repo also has terraform plans to setup the lambda function - including the necessary IAM roles and lambda schedule (once an hour by default). A normal `terraform plan` and `terraform apply` should fully setup the lambda function. Requires  terraform 0.7.8+.
 
+#### Using as a module
+
+The terraform plans can also be used as a module within your existing terraform project. Add as a module with something like below:
+
+```hcl
+module "aws-maintenance-lambda" {
+  source = "github.com/indix/aws-maintenance-lambda//terraform"
+
+  lambda_prepared_source_dir = "${path.root}/aws-maintenance-lambda-temp/source"
+  lambda_archive_path = "${path.root}/aws-maintenance-lambda-temp/dist/aws_maintenance_lambda.zip"
+  config_json = "${path.root}/files/aws-maintenance-lambda-config.json"
+}
+```
+
 ## License
 
 This is an open source project licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
