@@ -24,12 +24,15 @@ var getInstancesUnderMaintenance = function() {
   return ec2.describeInstanceStatus(instanceStatusParams)
     .promise()
     .then(function(data) {
-      data.InstanceStatuses.forEach(function(e) { instances[e.InstanceId] = e; });
-      return ec2.describeInstances({ InstanceIds: Object.keys(instances) }).promise();
+      if(data.InstanceStatuses.length > 0) {
+        data.InstanceStatuses.forEach(function(e) { instances[e.InstanceId] = e; });
+        return ec2.describeInstances({ InstanceIds: Object.keys(instances) }).promise();
+      }
     }).then(function(data) {
-      [].concat.apply([], data.Reservations.map(function(e) { return e.Instances; }))
-        .forEach(function(e) { instances[e.InstanceId]['details'] = e; });
-
+      if(data) {
+        [].concat.apply([], data.Reservations.map(function(e) { return e.Instances; }))
+          .forEach(function(e) { instances[e.InstanceId]['details'] = e; });
+      }
       return instances;
     });
 };
