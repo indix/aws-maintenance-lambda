@@ -1,6 +1,6 @@
 {
   "name": "aws_maintenance_lambda",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "AWS Lambda function to send alerts to Slack on AWS maintenance events",
   "main": "aws_maintenance_lambda.js",
   "scripts": {},

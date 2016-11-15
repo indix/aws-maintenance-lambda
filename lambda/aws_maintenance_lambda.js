@@ -4,7 +4,7 @@ var slack = require('./slack');
 var simpledb = require('./simpledb');
 var ec2 = require('./ec2');
 
-var handler = function* (event, context) {
+var handler = function* (event, context, callback) {
   try {
     yield simpledb.createDomain();
 
@@ -25,16 +25,19 @@ var handler = function* (event, context) {
 
     yield Promise.all(slackPromises);
 
-    context.done(null, 'Finished');
+    callback(null, 'Finished');
   } catch(e) {
-    context.error('Error',  e);
+    callback('Error',  e);
   }
 };
 
 exports.handler = Promise.coroutine(handler);
 
 //Uncomment below to test locally
-// exports.handler(null, {
-//   done: function(e, s) { console.log(s); },
-//   error: function(e, ex) { console.log(ex);}
+// exports.handler(null, null, function(e, s) {
+//   if(e) {
+//     console.log("ERROR!" + e);
+//   }
+//
+//   console.log(s);
 // });
