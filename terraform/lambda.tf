@@ -1,17 +1,17 @@
 resource "null_resource" "aws_maintenance_lambda" {
   triggers = {
-    package_json = "${base64sha256(file("${path.root}/../lambda/package.json"))}"
+    package_json = "${base64sha256(file("${path.module}/${var.lambda_source_dir}/package.json"))}"
   }
 
   provisioner "local-exec" {
-    command = "bash ${path.root}/scripts/setup.sh"
+    command = "bash ${path.module}/scripts/setup.sh ${path.module}/${var.lambda_source_dir} ${var.lambda_prepared_source_dir}"
   }
 }
 
-resource "archive_file" "aws_maintenance_lambda" {
+data "archive_file" "aws_maintenance_lambda" {
   type = "zip"
-  source_dir = "../lambda/package"
-  output_path = "../dist/aws_maintenance_lambda.zip"
+  source_dir = "${var.lambda_prepared_source_dir}/package"
+  output_path = "${var.lambda_archive_path}"
 
   depends_on = ["null_resource.aws_maintenance_lambda"]
 }
@@ -28,8 +28,8 @@ resource "aws_iam_role_policy" "aws_maintenance_lambda" {
 }
 
 resource "aws_lambda_function" "aws_maintenance_lambda" {
-  filename = "${archive_file.aws_maintenance_lambda.output_path}"
-  source_code_hash = "${base64sha256(file(archive_file.aws_maintenance_lambda.output_path))}"
+  filename = "${data.archive_file.aws_maintenance_lambda.output_path}"
+  source_code_hash = "${data.archive_file.aws_maintenance_lambda.output_base64sha256}"
   function_name = "aws_maintenance_lambda"
   description = "Lambda function to send notifications on AWS Maintenance Events"
   role = "${aws_iam_role.aws_maintenance_lambda.arn}"
