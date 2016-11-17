@@ -12,7 +12,7 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">aws-maintenance-lambda</h1>
-      <h2 class="project-tagline">A lambda function to send alerts (to Slack) on AWS maintenance events.</h2>
+      <h2 class="project-tagline">A lambda function to send alerts (to Slack, HipChat) on AWS maintenance events.</h2>
       <a href="https://github.com/indix/aws-maintenance-lambda" class="btn">View on GitHub</a>
       <a href="https://github.com/indix/aws-maintenance-lambda/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/indix/aws-maintenance-lambda/tarball/master" class="btn">Download .tar.gz</a>
@@ -22,7 +22,17 @@
       <h1>
 <a id="aws-maintenance-lambda" class="anchor" href="#aws-maintenance-lambda" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>aws-maintenance-lambda</h1>
 
-<p>A lambda function to send alerts (to Slack) on AWS maintenance events. While the email from AWS includes only the instance id, the alert will include the Name of the instance and owner (team or individual on Slack) from the appropriate tags.</p>
+<p>A lambda function to send alerts (to Slack, Hipchat) on AWS maintenance events. While the email from AWS includes only the instance id, the alert will include the Name of the instance and owner from the appropriate tags.</p>
+
+<h2>
+<a id="sample-notification-on-slack" class="anchor" href="#sample-notification-on-slack" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sample Notification on Slack</h2>
+
+<p><img src="/docs/slack-notification.png" alt=""></p>
+
+<h2>
+<a id="sample-notification-on-hipchat" class="anchor" href="#sample-notification-on-hipchat" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sample notification on HipChat</h2>
+
+<p><img src="/docs/hipchat-notification.png" alt=""></p>
 
 <h2>
 <a id="prerequisite" class="anchor" href="#prerequisite" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Prerequisite</h2>
@@ -36,6 +46,27 @@
 
 <p><code>store.simpledb.domain</code> - The lambda function keeps track of processed events in AWS simbedb. This configures the simpledb domain to be used for this purpose.</p>
 
+<p><code>notification.hipchat</code></p>
+
+<ul>
+<li>
+<code>auth_token</code> - The Hipchat API token.</li>
+<li>
+<code>room</code> - The room to send the notifications to.</li>
+<li>
+<code>icon_url</code> - Icon to use for the bot that sends the notification.</li>
+<li>
+<code>username</code> - Username of the bot that sends the notification.</li>
+<li>
+<code>owners</code> - List of owners per tag. The keys here will be the value of the tag <code>Owner</code>. This maps the tag value to owners - for example - <code>"devops : { "owner": "@devops_team"}"</code>
+
+<ul>
+<li>
+<code>all</code> - this is a catchall owner that is used as default if the resource did not have the <code>Owner</code> tag.</li>
+</ul>
+</li>
+</ul>
+
 <p><code>notification.slack</code></p>
 
 <ul>
@@ -44,11 +75,11 @@
 <li>
 <code>channel</code> - The channel to send the notifications to.</li>
 <li>
-<code>icon</code> - Icon to use for the bot that sends the notification.</li>
+<code>icon_url</code> - Icon to use for the bot that sends the notification.</li>
 <li>
 <code>username</code> - Username of the bot that sends the notification.</li>
 <li>
-<code>owners</code> - List of owners per tag. The keys here will be the value of the tag <code>Owner</code>. This maps the tag value to owners on slack - for example - <code>"devops : { "owner": "@devops_team"}"</code>
+<code>owners</code> - List of owners per tag. The keys here will be the value of the tag <code>Owner</code>. This maps the tag value to owners - for example - <code>"devops : { "owner": "@devops_team"}"</code>
 
 <ul>
 <li>
@@ -66,6 +97,19 @@
 <a id="terraform" class="anchor" href="#terraform" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Terraform</h3>
 
 <p>The repo also has terraform plans to setup the lambda function - including the necessary IAM roles and lambda schedule (once an hour by default). A normal <code>terraform plan</code> and <code>terraform apply</code> should fully setup the lambda function. Requires  terraform 0.7.8+.</p>
+
+<h4>
+<a id="using-as-a-module" class="anchor" href="#using-as-a-module" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using as a module</h4>
+
+<p>The terraform plans can also be used as a module within your existing terraform project. Add as a module with something like below:</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">module</span> <span class="pl-s"><span class="pl-pds">"</span>aws-maintenance-lambda<span class="pl-pds">"</span></span> {
+  source <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>github.com/indix/aws-maintenance-lambda//terraform<span class="pl-pds">"</span></span>
+
+  lambda_prepared_source_dir <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>${path.root}/aws-maintenance-lambda-temp/source<span class="pl-pds">"</span></span>
+  lambda_archive_path <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>${path.root}/aws-maintenance-lambda-temp/dist/aws_maintenance_lambda.zip<span class="pl-pds">"</span></span>
+  config_json <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>${path.root}/files/aws-maintenance-lambda-config.json<span class="pl-pds">"</span></span>
+}</pre></div>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
