@@ -5,11 +5,20 @@
     }
   },
   "notifications": {
+    "hipchat": {
+      "auth_token": "",
+      "room": "alerts",
+      "icon_url": "https://raw.githubusercontent.com/indix/aws-maintenance-lambda/master/docs/General_AWScloud.png",
+      "username": "AWS",
+      "owners": {
+        "all": { "owner": "@manojlds"}
+      }
+    },
     "slack": {
       "hook": "https://hooks.slack.com",
-      "channel": "#general",
-      "icon": ":yoda:",
-      "username": "Yoda",
+      "channel": "#alerts",
+      "icon_url": "https://raw.githubusercontent.com/indix/aws-maintenance-lambda/master/docs/General_AWScloud.png",
+      "username": "AWS",
       "owners": {
         "all": { "owner": "@manojlds"}
       }
