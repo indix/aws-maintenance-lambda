@@ -18,7 +18,7 @@ Update `lambda/config.json` with necessary config for your environment. The keys
 
 `store.simpledb.domain` - The lambda function keeps track of processed events in AWS simbedb. This configures the simpledb domain to be used for this purpose.
 
-`notification.slack`
+`notification.hipchat`
   - `auth_token` - The Hipchat API token.
   - `room` - The room to send the notifications to.
   - `icon_url` - Icon to use for the bot that sends the notification.
