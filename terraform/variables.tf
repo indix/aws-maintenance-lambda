@@ -25,3 +25,7 @@ variable "lambda_archive_path" {
 variable "config_json" {
   default = "../lambda/config.json"
 }
+
+variable "force_lambda_update" {
+  "default" = ""
+}
