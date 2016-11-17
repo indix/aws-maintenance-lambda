@@ -1,6 +1,6 @@
 var Promise = require('bluebird');
 
-var slack = require('./slack');
+var notification = require('./notifications/notification');
 var simpledb = require('./simpledb');
 var ec2 = require('./ec2');
 
@@ -10,24 +10,20 @@ var handler = function* (event, context, callback) {
 
     var instances = yield ec2.getInstancesUnderMaintenance();
 
-    var newInstances = yield Promise.filter(Object.keys(instances), function(e) {
-      var eventTimestamp = instances[e].Events[0].NotBefore;
-      return simpledb.isInstanceToBeProcessed(e, eventTimestamp);
-    });
-
-    var slackPromises = newInstances.map(function(e) {
-      return slack.sendMessage(instances[e])
+    yield Promise.filter(Object.keys(instances), function(instance) {
+      var eventTimestamp = instances[instance].Events[0].NotBefore;
+      return simpledb.isInstanceToBeProcessed(instance, eventTimestamp);
+    }).map(function(instance) {
+      return notification.sendMessage(instances[instance])
         .then(function() {
-          var eventTimestamp = instances[e].Events[0].NotBefore;
-          return simpledb.markInstanceAsProcessed(e, eventTimestamp);
+          var eventTimestamp = instances[instance].Events[0].NotBefore;
+          return simpledb.markInstanceAsProcessed(instance, eventTimestamp);
         });
-    });
-
-    yield Promise.all(slackPromises);
-
-    callback(null, 'Finished');
-  } catch(e) {
-    callback(e);
+    })
+    
+    callback(null, "Finished");
+  } catch(ex) {
+    callback(ex);
   }
 };
 
