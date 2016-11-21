@@ -2,19 +2,22 @@ var utils = require('./utils');
 
 var Promise = require('bluebird');
 var AWS = require('aws-sdk');
-var simpledb = new AWS.SimpleDB(utils.getRegionObject());
+
 
 var config = require('./config.json').store.simpledb;
 
 var createDomain = function() {
+  var simpledb = new AWS.SimpleDB(utils.getRegionObject());
   return simpledb.createDomain({ DomainName: config.domain }).promise();
 };
 
 var deleteDomain = function() {
+  var simpledb = new AWS.SimpleDB(utils.getRegionObject());
   return simpledb.deleteDomain({ DomainName: config.domain }).promise();
 };
 
 var isInstanceToBeProcessed = function(instance, eventTimestamp) {
+  var simpledb = new AWS.SimpleDB(utils.getRegionObject());
   var key = instance + eventTimestamp;
   return simpledb.getAttributes({
     DomainName: config.domain,
@@ -29,6 +32,7 @@ var isInstanceToBeProcessed = function(instance, eventTimestamp) {
 };
 
 var markInstanceAsProcessed = function(instance, eventTimestamp) {
+  var simpledb = new AWS.SimpleDB(utils.getRegionObject());
   var key = instance + eventTimestamp;
   return simpledb.putAttributes({
     DomainName: config.domain,
