@@ -2,3 +2,4 @@ node_modules/
 *.tgz
 package/
 *.log
+test/

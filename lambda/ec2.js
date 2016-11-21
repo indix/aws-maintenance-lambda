@@ -2,9 +2,9 @@ var utils = require('./utils');
 
 var Promise = require('bluebird');
 var AWS = require('aws-sdk');
-var ec2 = new AWS.EC2(utils.getRegionObject());
 
 var getInstancesUnderMaintenance = function() {
+  var ec2 = new AWS.EC2(utils.getRegionObject());
   var instances = {};
 
   var instanceStatusParams = {
