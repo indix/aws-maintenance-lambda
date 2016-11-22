@@ -44,12 +44,12 @@ var getNotificationData = function(instanceDetails, config) {
     final[current.Key] = current.Value;
     return final;
   }, {});
-  var owner = tags["Owner"];
+  var owner = tags['Owner'];
   
   return {
     color: getMessageColor(instanceDetails),
     message: instanceDetails.Events[0].Description,
-    name: tags["Name"],
+    name: tags['Name'],
     owner: (config.owners[owner] ||  config.owners.all).owner,
     date: instanceDetails.Events[0].NotBefore.toLocaleString(),
     instanceId: instanceDetails.InstanceId
