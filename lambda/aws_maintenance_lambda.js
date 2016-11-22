@@ -21,7 +21,7 @@ var handler = function* (event, context, callback) {
         });
     })
     
-    callback(null, "Finished");
+    callback(null, 'Finished');
   } catch(ex) {
     callback(ex);
   }
@@ -32,7 +32,7 @@ exports.handler = Promise.coroutine(handler);
 //Uncomment below to test locally
 // exports.handler(null, null, function(e, s) {
 //   if(e) {
-//     console.log("[ERROR] " + e);
+//     console.log('[ERROR] ' + e);
 //     return;
 //   }
 //

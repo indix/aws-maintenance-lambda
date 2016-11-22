@@ -1,17 +1,17 @@
 var chai = require('chai');
-var chaiAsPromised = require("chai-as-promised");
+var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 chai.should();
 
 var AWS = require('aws-sdk-mock');
-describe("simpledb#createDomain", function() {
-  var simpledb = require("../simpledb.js");
+describe('simpledb#createDomain', function() {
+  var simpledb = require('../simpledb.js');
 
   afterEach(function() {
     AWS.restore('SimpleDB');
   });
 
-  it("should create new domain if it doesn't exist", function() {
+  it('should create new domain if it doesn\'t exist', function() {
     AWS.mock('SimpleDB', 'createDomain', function (params, callback){
       callback(null, 'created');
     });
@@ -21,52 +21,52 @@ describe("simpledb#createDomain", function() {
   
 });
 
-describe("simpledb#isInstanceToBeProcessed", function() {
-  var simpledb = require("../simpledb.js");
+describe('simpledb#isInstanceToBeProcessed', function() {
+  var simpledb = require('../simpledb.js');
 
   afterEach(function() {
     AWS.restore('SimpleDB');
   });
   
-  it("should return true if event for instance has not been processed", function() {
+  it('should return true if event for instance has not been processed', function() {
     AWS.mock('SimpleDB', 'getAttributes', function (params, callback){
-      if(params.DomainName === 'aws-maintenance-notifications' && params.ItemName === "instance-1event-1") {
+      if(params.DomainName === 'aws-maintenance-notifications' && params.ItemName === 'instance-1event-1') {
        return callback(null, {});
       }
      
       return callback('error');
     });
     
-    return simpledb.isInstanceToBeProcessed("instance-1", "event-1").should.eventually.equal(true);
+    return simpledb.isInstanceToBeProcessed('instance-1', 'event-1').should.eventually.equal(true);
   });
   
-  it("should return false if event for instance has been processed", function() {
+  it('should return false if event for instance has been processed', function() {
     AWS.mock('SimpleDB', 'getAttributes', function (params, callback){
-      if(params.DomainName === 'aws-maintenance-notifications' && params.ItemName === "instance-1event-1") {
+      if(params.DomainName === 'aws-maintenance-notifications' && params.ItemName === 'instance-1event-1') {
        return callback(null, { Attributes: 'done'});
       }
      
       return callback('error');
     });
     
-    return simpledb.isInstanceToBeProcessed("instance-1", "event-1").should.eventually.equal(false);
+    return simpledb.isInstanceToBeProcessed('instance-1', 'event-1').should.eventually.equal(false);
   });
   
 });
 
 
-describe("simpledb#markInstanceAsProcessed", function() {
-  var simpledb = require("../simpledb.js");
+describe('simpledb#markInstanceAsProcessed', function() {
+  var simpledb = require('../simpledb.js');
 
   afterEach(function() {
     AWS.restore('SimpleDB');
   });
   
-  it("should set event of instance as processed", function() {
+  it('should set event of instance as processed', function() {
     AWS.mock('SimpleDB', 'putAttributes', function (params, callback){
       params.should.eql({
         DomainName: 'aws-maintenance-notifications',
-        ItemName: "instance-1event-1",
+        ItemName: 'instance-1event-1',
         Attributes: [
           {
             Name: 'processed',
@@ -78,7 +78,7 @@ describe("simpledb#markInstanceAsProcessed", function() {
       callback(null, 'done')
     });
     
-    return simpledb.markInstanceAsProcessed("instance-1", "event-1").should.be.fulfilled
+    return simpledb.markInstanceAsProcessed('instance-1', 'event-1').should.be.fulfilled
   });
   
 });

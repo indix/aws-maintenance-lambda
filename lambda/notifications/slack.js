@@ -3,48 +3,48 @@ var querystring = require('querystring');
 var Promise = require('bluebird');
 
 var getRequestData = function(notificationData, config) {
-  notificationData.color = notificationData.color === "red" ? "danger" : "warning";
+  notificationData.color = notificationData.color === 'red' ? 'danger' : 'warning';
   
   var payloadStr = JSON.stringify({
-    "username": config.username,
-    "channel": config.channel,
-    "link_names": 1,
-    "attachments": [
+    'username': config.username,
+    'channel': config.channel,
+    'link_names': 1,
+    'attachments': [
       {
-        "title": "AWS Maintenance Event",
-        "fallback": notificationData.message,
-        "text": notificationData.message,
-        "mrkdwn_in": ["fields"],
-        "fields": [
+        'title': 'AWS Maintenance Event',
+        'fallback': notificationData.message,
+        'text': notificationData.message,
+        'mrkdwn_in': ['fields'],
+        'fields': [
           {
-            "title": "Instance ID",
-            "value": notificationData.instanceId,
-            "short": true
+            'title': 'Instance ID',
+            'value': notificationData.instanceId,
+            'short': true
           },
           {
-            "title": "Name",
-            "value": notificationData.name,
-            "short": true
+            'title': 'Name',
+            'value': notificationData.name,
+            'short': true
           },
           {
-            "title": "Owner",
-            "value": notificationData.owner,
-            "short": true
+            'title': 'Owner',
+            'value': notificationData.owner,
+            'short': true
           },
           {
-            "title": "Date",
-            "value": notificationData.date,
-            "short": true
+            'title': 'Date',
+            'value': notificationData.date,
+            'short': true
           }
         ],
-        "color": notificationData.color
+        'color': notificationData.color
       }
     ],
-    "icon_url": config.icon_url
+    'icon_url': config.icon_url
   });
 
   var data = querystring.stringify({
-    "payload": payloadStr
+    'payload': payloadStr
   });
 
   var options = {

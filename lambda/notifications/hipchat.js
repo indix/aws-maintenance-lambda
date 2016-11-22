@@ -6,43 +6,43 @@ var utils = require('../utils');
 
 var getRequestData = function(notificationData, config) {
   var data = JSON.stringify({
-    "color": notificationData.color,
-    "message": notificationData.message,
-    "notify": true,
-    "message_format": "text",
-    "card": {
-      "style": "application",
-      "url": "https://console.aws.amazon.com/ec2/v2/home?region=" + utils.getRegion()  + "#Events:",
-      "format": "medium",
-      "id": notificationData.instanceId + notificationData.date,
-      "title": "AWS Maintenance Event",
-      "description": notificationData.message,
-      "icon": {
-        "url": config.icon_url
+    'color': notificationData.color,
+    'message': notificationData.message,
+    'notify': true,
+    'message_format': 'text',
+    'card': {
+      'style': 'application',
+      'url': 'https://console.aws.amazon.com/ec2/v2/home?region=' + utils.getRegion()  + '#Events:',
+      'format': 'medium',
+      'id': notificationData.instanceId + notificationData.date,
+      'title': 'AWS Maintenance Event',
+      'description': notificationData.message,
+      'icon': {
+        'url': config.icon_url
       },
-      "attributes": [
+      'attributes': [
         {
-          "label": "Instance ID",
-          "value": {
-            "label": notificationData.instanceId
+          'label': 'Instance ID',
+          'value': {
+            'label': notificationData.instanceId
           }
         },
         {
-          "label": "Name",
-          "value": {
-            "label": notificationData.name
+          'label': 'Name',
+          'value': {
+            'label': notificationData.name
           }
         },
         {
-          "label": "Owner",
-          "value": {
-            "label": notificationData.owner
+          'label': 'Owner',
+          'value': {
+            'label': notificationData.owner
           }
         },
         {
-          "label": "Date",
-          "value": {
-            "label": notificationData.date
+          'label': 'Date',
+          'value': {
+            'label': notificationData.date
           }
         },
       ]

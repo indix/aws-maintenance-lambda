@@ -1,4 +1,4 @@
-var region = process.env.AWS_DEFAULT_REGION || "us-east-1";
+var region = process.env.AWS_DEFAULT_REGION || 'us-east-1';
 
 var getRegion = function () {
   return region;
