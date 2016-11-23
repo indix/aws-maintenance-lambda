@@ -1,13 +1,8 @@
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
-chai.should();
-
 var AWS = require('aws-sdk-mock');
 
 describe('ec2#getInstancesUnderMaintenance', function() {
   var ec2 = require('../ec2.js');
-  
+
   afterEach(function() {
     AWS.restore('EC2');
   });

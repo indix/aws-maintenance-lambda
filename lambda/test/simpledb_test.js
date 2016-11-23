@@ -1,8 +1,3 @@
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
-chai.should();
-
 var AWS = require('aws-sdk-mock');
 describe('simpledb#createDomain', function() {
   var simpledb = require('../simpledb.js');
@@ -18,7 +13,6 @@ describe('simpledb#createDomain', function() {
     
     return simpledb.createDomain().should.be.fulfilled;
   });
-  
 });
 
 describe('simpledb#isInstanceToBeProcessed', function() {
@@ -51,7 +45,6 @@ describe('simpledb#isInstanceToBeProcessed', function() {
     
     return simpledb.isInstanceToBeProcessed('instance-1', 'event-1').should.eventually.equal(false);
   });
-  
 });
 
 
@@ -80,6 +73,5 @@ describe('simpledb#markInstanceAsProcessed', function() {
     
     return simpledb.markInstanceAsProcessed('instance-1', 'event-1').should.be.fulfilled
   });
-  
 });
 
