@@ -37,4 +37,4 @@ var getInstancesUnderMaintenance = function() {
     });
 };
 
-exports.getInstancesUnderMaintenance = getInstancesUnderMaintenance;
+module.exports = { getInstancesUnderMaintenance };

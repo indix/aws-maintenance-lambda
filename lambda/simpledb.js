@@ -46,7 +46,4 @@ var markInstanceAsProcessed = function(instance, eventTimestamp) {
   }).promise();
 };
 
-exports.createDomain = createDomain;
-exports.deleteDomain = deleteDomain;
-exports.isInstanceToBeProcessed = isInstanceToBeProcessed;
-exports.markInstanceAsProcessed = markInstanceAsProcessed;
+module.exports = { createDomain, deleteDomain, isInstanceToBeProcessed, markInstanceAsProcessed};

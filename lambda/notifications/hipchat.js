@@ -63,4 +63,4 @@ var getRequestData = function(notificationData, config) {
   return { options, data };
 };
 
-exports.getRequestData = getRequestData;
+module.exports = { getRequestData };

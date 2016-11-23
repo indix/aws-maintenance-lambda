@@ -8,5 +8,4 @@ var getRegionObject = function() {
   return { region: region };
 }
 
-exports.getRegion = getRegion;
-exports.getRegionObject = getRegionObject;
+module.exports = { getRegion, getRegionObject };

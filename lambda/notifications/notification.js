@@ -67,4 +67,4 @@ var sendMessage = function(instanceDetails) {
   return Promise.all(notificationPromises);
 };
 
-exports.sendMessage = sendMessage;
+module.exports = { sendMessage };
