@@ -59,7 +59,7 @@ var getRequestData = function(notificationData, config) {
       'Content-Length': data.length
     }
   };
-  
+
   return { options, data };
 };
 

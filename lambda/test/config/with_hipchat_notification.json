@@ -1,0 +1,18 @@
+{
+  "store": {
+    "simpledb": {
+      "domain": "aws-maintenance-notifications"
+    }
+  },
+  "notifications": {
+    "hipchat": {
+      "auth_token": "123456",
+      "room": "alerts",
+      "icon_url": "https://raw.githubusercontent.com/indix/aws-maintenance-lambda/master/docs/General_AWScloud.png",
+      "username": "AWS",
+      "owners": {
+        "all": { "owner": "@manojlds"}
+      }
+    }
+  }
+}

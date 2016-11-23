@@ -1,0 +1,18 @@
+{
+  "store": {
+    "simpledb": {
+      "domain": "aws-maintenance-notifications"
+    }
+  },
+  "notifications": {
+    "slack": {
+      "hook": "https://hooks.slack.com/123456",
+      "channel": "#alerts",
+      "icon_url": "https://raw.githubusercontent.com/indix/aws-maintenance-lambda/master/docs/General_AWScloud.png",
+      "username": "AWS",
+      "owners": {
+        "all": { "owner": "@manojlds"}
+      }
+    }
+  }
+}
