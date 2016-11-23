@@ -4,7 +4,7 @@
   "description": "AWS Lambda function to send alerts to Slack on AWS maintenance events",
   "main": "aws_maintenance_lambda.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "mocha --recursive --reporter spec"
   },
   "author": "manojlds <manojlds@gmail.com> (https://stacktoheap.com/)",
   "license": "MIT",
@@ -16,6 +16,7 @@
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "mocha": "^3.1.2",
-    "nock": "^9.0.2"
+    "nock": "^9.0.2",
+    "rewire": "^2.5.2"
   }
 }

@@ -1,0 +1,10 @@
+{
+  "store": {
+    "simpledb": {
+      "domain": "aws-maintenance-notifications"
+    }
+  },
+  "notifications": {
+    
+  }
+}

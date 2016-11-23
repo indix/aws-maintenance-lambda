@@ -1,0 +1,21 @@
+{
+  "Events": [
+    {
+      "Description": "degraded hardware",
+      "NotBefore": "2016-11-10"
+    }
+  ],
+  "InstanceId": "i-123456",
+  "details": {
+    "Tags": [
+      {
+        "Key": "Name",
+        "Value": "instance-1"
+      },
+      {
+        "Key": "Owner",
+        "Value": "owner-1"
+      }
+    ]
+  }
+}
