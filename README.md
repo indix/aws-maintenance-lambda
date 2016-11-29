@@ -1,4 +1,6 @@
-![](/docs/aws_maintenance_lambda.png)
+<p align="center">
+<img src="docs/aws_maintenance_lambda.png"/>
+</p>
 
 A lambda function to send alerts (to Slack, Hipchat) on AWS maintenance events. While the email from AWS includes only the instance id, the alert will include the Name of the instance and owner from the appropriate tags.
 
