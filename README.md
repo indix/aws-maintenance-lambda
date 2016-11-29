@@ -5,10 +5,10 @@
 A lambda function to send alerts (to Slack, Hipchat) on AWS maintenance events. While the email from AWS includes only the instance id, the alert will include the Name of the instance and owner from the appropriate tags.
 
 ## Sample Notification on Slack
-![](/docs/slack-notification.png)
+![](docs/slack-notification.png)
 
 ## Sample notification on HipChat
-![](/docs/hipchat-notification.png)
+![](docs/hipchat-notification.png)
 
 ## Prerequisite
 
