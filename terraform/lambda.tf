@@ -5,7 +5,7 @@ resource "null_resource" "aws_maintenance_lambda" {
   }
 
   provisioner "local-exec" {
-    command = "bash ${path.module}/scripts/setup.sh ${path.module}/${var.lambda_source_dir} ${var.lambda_prepared_source_dir} ${var.config_json}"
+    command = "bash '${path.module}/scripts/setup.sh' '${path.module}/${var.lambda_source_dir}' '${var.lambda_prepared_source_dir}' '${var.config_json}'"
   }
 }
 
