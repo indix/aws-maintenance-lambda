@@ -7,11 +7,6 @@ LAMBDA_DIR="$1"
 LAMBDA_PREPARED_DIR="$2"
 CONFIG_FILE="$3"
 
-if [ ! -d "${LAMBDA_DIR}/package" ];
-  then
-    mkdir "${LAMBDA_DIR}/package";
-fi
-
 pushd "${LAMBDA_DIR}"
 rm -rf aws_maintenance_lambda-*.tgz
 npm pack
