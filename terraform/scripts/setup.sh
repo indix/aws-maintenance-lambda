@@ -12,7 +12,7 @@ rm -rf aws_maintenance_lambda-*.tgz
 npm pack
 
 pushd "${LAMBDA_PREPARED_DIR}"
-rm -rf package/
+rm -rf package/*
 tar xvf "${LAMBDA_DIR}"/aws_maintenance_lambda-*.tgz
 
 pushd package/
