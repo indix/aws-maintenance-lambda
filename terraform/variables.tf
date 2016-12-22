@@ -10,6 +10,10 @@ variable "lamba_schedue" {
   default = "60 minutes"
 }
 
+variable "lambda_role_arn" {
+  default = ""
+}
+
 variable "lambda_source_dir" {
   default = "../lambda"
 }
