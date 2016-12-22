@@ -32,6 +32,7 @@ resource "aws_cloudwatch_event_rule" "lambda_schedule" {
   name = "lambda_schedule_aws_maintenance_lambda"
   description = "Lambda Schedule"
   schedule_expression = "rate(${var.lamba_schedue})"
+  depends_on = ["aws_lambda_function.aws_maintenance_lambda"]
 }
 
 resource "aws_cloudwatch_event_target" "aws_maintenance_lambda_schedule" {
