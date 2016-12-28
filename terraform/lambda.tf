@@ -5,7 +5,7 @@ resource "null_resource" "aws_maintenance_lambda" {
   }
 
   provisioner "local-exec" {
-    command = "bash ${path.module}/scripts/setup.sh ${path.module}/${var.lambda_source_dir} ${var.lambda_prepared_source_dir} ${var.config_json}"
+    command = "bash '${path.module}/scripts/setup.sh' '${path.module}/${var.lambda_source_dir}' '${var.lambda_prepared_source_dir}' '${var.config_json}'"
   }
 }
 
@@ -17,23 +17,12 @@ data "archive_file" "aws_maintenance_lambda" {
   depends_on = ["null_resource.aws_maintenance_lambda"]
 }
 
-resource "aws_iam_role" "aws_maintenance_lambda" {
-  name = "aws_maintenance_lambda_role"
-  assume_role_policy = "${file("${path.module}/templates/role.json")}"
-}
-
-resource "aws_iam_role_policy" "aws_maintenance_lambda" {
-  name = "aws_maintenance_lambda_role_policy"
-  role = "${aws_iam_role.aws_maintenance_lambda.id}"
-  policy = "${file("${path.module}/templates/policy.json")}"
-}
-
 resource "aws_lambda_function" "aws_maintenance_lambda" {
   filename = "${data.archive_file.aws_maintenance_lambda.output_path}"
   source_code_hash = "${data.archive_file.aws_maintenance_lambda.output_base64sha256}"
   function_name = "aws_maintenance_lambda"
   description = "Lambda function to send notifications on AWS Maintenance Events"
-  role = "${aws_iam_role.aws_maintenance_lambda.arn}"
+  role = "${var.lambda_role_arn}"
   handler = "aws_maintenance_lambda.handler"
   runtime = "nodejs4.3"
   timeout = 10
@@ -43,6 +32,7 @@ resource "aws_cloudwatch_event_rule" "lambda_schedule" {
   name = "lambda_schedule_aws_maintenance_lambda"
   description = "Lambda Schedule"
   schedule_expression = "rate(${var.lamba_schedue})"
+  depends_on = ["aws_lambda_function.aws_maintenance_lambda"]
 }
 
 resource "aws_cloudwatch_event_target" "aws_maintenance_lambda_schedule" {

@@ -10,6 +10,10 @@ variable "lamba_schedue" {
   default = "60 minutes"
 }
 
+variable "lambda_role_arn" {
+  default = ""
+}
+
 variable "lambda_source_dir" {
   default = "../lambda"
 }
@@ -23,7 +27,7 @@ variable "lambda_archive_path" {
 }
 
 variable "config_json" {
-  default = "../lambda/config.json"
+  default = "../config.json"
 }
 
 variable "force_lambda_update" {
