@@ -16,5 +16,5 @@ rm -rf package/
 tar xvf ${LAMBDA_DIR}/aws_maintenance_lambda-*.tgz
 
 pushd package/
-cp "${CONFIG_FILE}" ./config.json
+cp "../${CONFIG_FILE}" ./config.json
 npm install --production
